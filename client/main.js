@@ -1,9 +1,34 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
-import './main.html';
+// import './main.html';
 
 Sculptures = new Mongo.Collection("sculptures");
+
+Sculptures.attachSchema(new SimpleSchema({
+  title: {
+    type: String,
+    label: "Title",
+    max: 200
+  },
+  artist: {
+    type: String,
+    label: "Artist"
+  },
+  date: {
+    type: Date,
+    label: "Date"    
+  },
+  lat: {
+    type: String,
+    label: "Latitude"
+  },
+  lon: {
+    type: String,
+    label: "Longitude"
+  }
+}));
+
 
 
 if (Meteor.isClient) {
@@ -11,7 +36,7 @@ if (Meteor.isClient) {
     GoogleMaps.load();
   });
 
-  Template.body.helpers({
+  Template.mapLayout.helpers({
     exampleMapOptions: function() {
       // Make sure the maps API has loaded
       if (GoogleMaps.loaded()) {
@@ -24,7 +49,12 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.body.onCreated(function() {
+  Template.mapLayout.events({
+
+
+  })
+
+  Template.mapLayout.onCreated(function() {
 
     // We can use the `ready` callback to interact with the map API once the map is ready.
     GoogleMaps.ready('exampleMap', function(map) {

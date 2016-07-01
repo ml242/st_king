@@ -1,15 +1,30 @@
+
 <head>
   <title>st_king</title>
 </head>
 
-<body>
-  <h1>Welcome to The King!</h1>
+<template name="mainLayout">
+
+	<body>
+	  <h1>Welcome to The King!</h1>
+	
+	  {{>Template.dynamic template=content}}  
+	  
+	</body>
+
+</template>
+
+<template name="mapLayout">
 
   <div class="map-container">
     {{> googleMap name="exampleMap" options=exampleMapOptions}}
   </div>
 
-  
-</body>
+</template>
+
+<template name="scupltureForm">
 
 
+	{{> quickForm id="addForm" collection="Sculptures" doc=this id="insertScupture" type="insert"}}
+
+</template>
