@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
-// import './main.html';
+import './main.html';
 
 Sculptures = new Mongo.Collection("sculptures");
 
@@ -20,11 +20,13 @@ Sculptures.attachSchema(new SimpleSchema({
     label: "Date"    
   },
   lat: {
-    type: String,
+    type: Number,
+    decimal: true,
     label: "Latitude"
   },
   lon: {
-    type: String,
+    type: Number,
+    decimal: true,
     label: "Longitude"
   }
 }));
@@ -49,7 +51,30 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.mapLayout.events({
+  Template.scupltureForm.events({
+
+    "submit": function(event){
+      event.preventDefault();
+
+
+      Sculptures.insert({
+        artist: event.target.artist.value,
+        date: event.target.date.value,
+        lat: event.target.lat.value,
+        lon: event.target.lon.value
+      })
+
+
+      event.target.artist.value = '';
+      event.target.date.value = '';
+      event.target.lat.value = '';
+      event.target.lon.value = '';
+
+      FlowRouter.go('/')
+
+      return false
+
+    }
 
 
   })

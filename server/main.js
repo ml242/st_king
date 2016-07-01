@@ -19,16 +19,16 @@ Sculptures.attachSchema(new SimpleSchema({
     label: "Date"    
   },
   lat: {
-    type: String,
+    type: Number,
+    decimal: true,
     label: "Latitude"
   },
   lon: {
-    type: String,
+    type: Number,
+    decimal: true,
     label: "Longitude"
   }
 }));
-
-
 
 
 
@@ -42,11 +42,11 @@ Meteor.startup(() => {
   if ( !Sculptures.findOne() ){
 
     Sculptures.insert({
-      artist: "DiSuvero",
+      artist: "Di Suvero",
       title: "damn good art",
       date: "10/10/1962",
-      lat: "41.42327777777778",
-      lon: "-74.063"
+      lat: 41.42327777777778,
+      lon: -74.063
     });
 
   }

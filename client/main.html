@@ -22,9 +22,11 @@
 
 </template>
 
+
+
 <template name="scupltureForm">
 
 
-	{{> quickForm id="addForm" collection="Sculptures" doc=this id="insertScupture" type="insert"}}
+	{{> quickForm id="addForm" collection="Sculptures" doc=this id="insertScupture" scope="Sculptures" type="insert"}}
 
 </template>
